@@ -26,24 +26,4 @@ jobs:
           CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
           CLAUDE_API_URL: https://api.anthropic.com/v1/complete
         run: |
-          python - <<'PY'
-import os, sys, json
-import httpx
-example = os.environ.get('EXAMPLE_ROWS')
-if not example:
-    example = "30.06.24 Konto- und Portospesen 0.60 CHF 46801.34\n21.05.24 Zahlungsauftrag Strassburger Elektro AG 9,388.90 CHF 46801.94"
-api_key = os.environ.get('CLAUDE_API_KEY')
-api_url = os.environ.get('CLAUDE_API_URL')
-if not api_key:
-    print('CLAUDE_API_KEY not set', file=sys.stderr); sys.exit(1)
-prompt = (
-    'Extract structured fields from the following bank transactions and return JSON array of objects with {date, amount, currency, description}:\n' + example + '\nReturn only JSON.'
-)
-headers = {'Authorization': f'Bearer {api_key}', 'Content-Type': 'application/json'}
-payload = { 'model': 'claude-2.1', 'prompt': prompt, 'max_tokens_to_sample': 1000 }
-with httpx.Client(timeout=120) as client:
-    r = client.post(api_url, json=payload, headers=headers)
-    r.raise_for_status()
-    print('--- CLAUDE RAW RESPONSE ---')
-    print(r.text)
-PY
+          python backend/scripts/claude_test.py
