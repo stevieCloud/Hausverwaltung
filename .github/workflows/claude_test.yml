@@ -25,7 +25,6 @@ jobs:
         env:
           CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
           CLAUDE_API_URL: https://api.anthropic.com/v1/complete
-          EXAMPLE_ROWS: ${{ github.event.inputs.example_rows }}
         run: |
           python - <<'PY'
 import os, sys, json
