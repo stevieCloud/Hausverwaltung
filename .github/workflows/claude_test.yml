@@ -29,11 +29,12 @@ jobs:
         env:
           CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
           CLAUDE_API_URL: https://api.anthropic.com/v1/complete
+          EXAMPLE_ROWS: ${{ github.event.inputs.example_rows }}
         run: |
           python - <<'PY'
 import os, sys, json
 import httpx
-example = "${{ github.event.inputs.example_rows }}"
+example = os.environ.get('EXAMPLE_ROWS')
 if not example:
     example = "30.06.24 Konto- und Portospesen 0.60 CHF 46801.34\n21.05.24 Zahlungsauftrag Strassburger Elektro AG 9,388.90 CHF 46801.94"
 api_key = os.environ.get('CLAUDE_API_KEY')
