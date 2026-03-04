@@ -2,11 +2,7 @@ name: Claude Test Run
 
 on:
   workflow_dispatch:
-    inputs:
-      example_rows:
-        description: 'Example transactions (optional)'
-        required: false
-        default: "30.06.24 Konto- und Portospesen 0.60 CHF 46801.34\n21.05.24 Zahlungsauftrag Strassburger Elektro AG 9,388.90 CHF 46801.94\n10.05.24 Zahlungsauftrag Gemeinde Ermatingen 25,972.55 CHF 61185.84\n31.03.24 Konto- und Portospesen 5.20 CHF 87158.39"
+    # optional input removed temporarily to avoid YAML parsing issues
 
 jobs:
   run-claude-test:
